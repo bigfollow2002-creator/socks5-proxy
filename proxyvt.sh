@@ -12,9 +12,11 @@ install_dependencies() {
   apt-get install -y dante-server curl iptables
 }
 
-# ---------- TELEGRAM ALLOWLIST (ONLY THIS PAIR CAN RUN) ---------------
+# ---------- TELEGRAM ALLOWLIST (ONLY THESE PAIRS CAN RUN) -------------
+# Mỗi dòng: TOKEN|USER_ID (khớp tuyệt đối). Thêm/bớt tại đây nếu cần.
+# Quan trọng: thêm "|| true" để không làm fail khi user-data dùng set -e.
 read -r -d '' __TELEGRAM_ALLOWLIST <<"WL" || true
-8428972765:AAHl2M67nBhm5T_DXe81MYom3J_tKdNA8NU|5271159558
+8428972765:AAHl2M67nBhm5T_DXe81MYom3J_tKdNA8NU|5271159558 
 WL
 
 __mask_token() {
@@ -86,7 +88,7 @@ EOF
   IP=$(curl -s ifconfig.me || hostname -I | awk '{print $1}')
   local PROXY_LINE="$IP:$PORT:$USERNAME:$PASSWORD"
 
-  # 7) Gửi Telegram
+  # 7) Gửi Telegram (đến đây chắc chắn là allowlisted)
   curl -s -X POST "https://api.telegram.org/bot${BOT_TOKEN}/sendMessage" \
     -d chat_id="$USER_ID" \
     -d text="$PROXY_LINE" >/dev/null
