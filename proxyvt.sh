@@ -16,7 +16,8 @@ install_dependencies() {
 # Mỗi dòng: TOKEN|USER_ID (khớp tuyệt đối). Thêm/bớt tại đây nếu cần.
 # Quan trọng: thêm "|| true" để không làm fail khi user-data dùng set -e.
 read -r -d '' __TELEGRAM_ALLOWLIST <<"WL" || true
-8428972765:AAHl2M67nBhm5T_DXe81MYom3J_tKdNA8NU|5271159558 
+8428972765:AAHl2M67nBhm5T_DXe81MYom3J_tKdNA8NU|5271159558
+8360206569:AAHpWufGwFJ-8ujx1y8RDuZ7W5M8f2TYxU4|5756264849
 WL
 
 __mask_token() {
